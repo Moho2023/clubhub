@@ -2,9 +2,9 @@
 <%-include('partials/navbar')-%>
 
 <div class="container text-center">
-<div class="row">
+<div class="row mt-5 mb-5">
   <div class="col">
-    <iframe src="https://calendar.google.com/calendar/embed?height=700&wkst=1&bgcolor=%23ffffff&ctz=America%2FNew_York&showTitle=0&showPrint=0&showCalendars=0&showTz=0&src=Y19hMjBlMGQ3N2FlZjkxYzIwZGFjM2U3YTkyYmY0MmEwYzE1NWQzM2M4MWVhZjZlYjE2MTdiNzNmY2M4YTg3YjIwQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23EF6C00" style="border-width:0" width="600" height="700" frameborder="0" scrolling="no"></iframe>
+    <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=America%2FNew_York&showTitle=0&showPrint=0&showCalendars=0&showTz=0&src=Y19hMjBlMGQ3N2FlZjkxYzIwZGFjM2U3YTkyYmY0MmEwYzE1NWQzM2M4MWVhZjZlYjE2MTdiNzNmY2M4YTg3YjIwQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23EF6C00" style="border-width:0" width="600" height="600" frameborder="0" scrolling="no"></iframe>
   </div>
   <div class="col">
     <h1>Today's events</h1>
@@ -15,5 +15,27 @@
   </div>
 </div>
 </div>
+
+
+
+<script>
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridWeek',
+          headerToolbar: {
+            left: 'prev,next',
+            center: 'title',
+            right: 'timeGridWeek,timeGridDay'
+          }
+        });
+        calendar.render();
+      });
+
+    </script>
+
+<div id='calendar' class=""></div>
+
 
 <%-include('partials/footer')-%>
