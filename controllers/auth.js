@@ -1,5 +1,6 @@
 const express = require('express'),
   router = express.Router();
+const fs = require('fs');
 const session = require('express-session');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
@@ -9,13 +10,11 @@ const KEYS = require('../config/keys.json');
 
 let userProfile; //only used if you want to see user info beyond username
 
-const Player = require('../models/player_model');
-
 router.use(session({
   resave: false,
   saveUninitialized: true,
   cookie: {
-    maxAge: 600000 //600 seconds of login time before being logged out
+    maxAge: 600000000 //600000 seconds of login time before being logged out
   },
   secret: KEYS["session-secret"]
 }));
@@ -46,7 +45,7 @@ passport.deserializeUser(function(obj, cb) {
 */
 router.get('/auth/google',
   passport.authenticate('google', {
-    scope: ['email']
+    scope: ['profile', 'email']
   }));
 
 /*
@@ -58,14 +57,20 @@ router.get('/auth/google/callback',
   }),
   function(request, response) {
     console.log(userProfile);
+    let login_history = JSON.parse(fs.readFileSync(__dirname+'/../config/user_login_history.json'));
+    let timern = new Date();
+    login_history[timern] = userProfile;
+    fs.writeFileSync(__dirname+'/../config/user_login_history.json', JSON.stringify(login_history)); //log everyone who logs in into json file
     response.redirect('/');
   });
 
-router.get("/auth/logout", (request, response) => {
-  request.logout();
-  let playerID = request.user._json.email;
-  Player.createPlayer(playerID, playerID.split('.')[0]);//only creates if not in players.json
-  response.redirect('/');
+
+
+router.post('/auth/logout', function(req, res, next) {
+  req.logout(function(err) {
+    if (err) { return next(err); }
+    res.redirect('/login');
+  });
 });
 
 module.exports = router;

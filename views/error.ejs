@@ -1,0 +1,19 @@
+<%-include('partials/header', {pagetitle: "Home"})-%>
+<%-include('partials/navbar')-%>
+
+<div class="card mb-3 mx-auto mt-5" style="max-width: 800px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="/error.png" height="400" width="400" class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h3 class="card-title display-3">Oops... <%=errorCode%> error</h3>
+        <em><h6 class="card-text display-6"><%=details%></h6></em>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<%-include('partials/footer')-%>
