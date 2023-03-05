@@ -33,7 +33,14 @@
         calendar.render();
       });
 
+      const popover = new bootstrap.Popover('.popover-dismiss', {
+  trigger: 'focus'
+})
+
     </script>
+
+<a tabindex="0" class="btn btn-lg btn-danger" role="button" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-title="Dismissible popover" data-bs-content="And here's some amazing content. It's very engaging. Right?">Dismissible popover</a>
+
 
 <div id='calendar' class=""></div>
 
