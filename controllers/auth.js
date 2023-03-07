@@ -22,8 +22,8 @@ router.use(passport.initialize());
 router.use(passport.session());
 
 passport.use(new GoogleStrategy({
-    clientID: KEYS["google-client-id"],
-    clientSecret: KEYS["google-client-secret"],
+    clientID: KEYS["google-client_id"],
+    clientSecret: KEYS["google-client_secret"],
     callbackURL: "http://localhost:3000/auth/google/callback"
     //todo: port==process.env.PORT? :
   },
