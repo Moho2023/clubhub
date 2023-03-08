@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Moho2023/clubhub#readme",
   "dependencies": {
-    "fullcalendar": "^6.1.4"
+    "fullcalendar": "^6.1.4",
+    "short-uuid": "^4.2.2"
   }
 }

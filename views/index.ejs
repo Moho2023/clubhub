@@ -1,23 +1,99 @@
 <%-include('partials/header', {pagetitle: "Home"})-%>
 <%-include('partials/navbar')-%>
 
-<div class="container text-center">
-<div class="row mt-5 mb-5">
-  <div class="col">
-    <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=America%2FNew_York&showTitle=0&showPrint=0&showCalendars=0&showTz=0&src=Y19hMjBlMGQ3N2FlZjkxYzIwZGFjM2U3YTkyYmY0MmEwYzE1NWQzM2M4MWVhZjZlYjE2MTdiNzNmY2M4YTg3YjIwQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23EF6C00" style="border-width:0" width="600" height="600" frameborder="0" scrolling="no"></iframe>
-  </div>
-  <div class="col">
-    <h1>Today's events</h1>
-    <ul>
-      <li>Model Congress</li>
-      <li>Academic Quiz Bowl</li>
-    </ul>
-  </div>
-</div>
-</div>
+
+<div class="w-75 mx-auto" id="calendar"></div>
+
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function() {
+  var calendarEl = document.getElementById('calendar');
+
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'dayGridMonth',
+    initialDate: '2023-02-07',
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,listMonth,listWeek'
+    },
+    dayMaxEventRows: true,
+  views: {
+    timeGrid: {
+      dayMaxEventRows: 6
+    }
+  },
+    events: [
+      {
+        title: 'All Day Event',
+        start: '2023-02-01'
+      },
+      {
+        title: 'Long Event',
+        start: '2023-02-07',
+        end: '2023-02-10'
+      },
+      {
+        groupId: '999',
+        title: 'Repeating Event',
+        start: '2023-02-09T16:00:00'
+      },
+      {
+        groupId: '999',
+        title: 'Repeating Event',
+        start: '2023-02-16T16:00:00'
+      },
+      {
+        title: 'Conference',
+        start: '2023-02-11',
+        end: '2023-02-13'
+      },
+      {
+        title: 'Meeting',
+        start: '2023-02-12T10:30:00',
+        end: '2023-02-12T12:30:00'
+      },
+      {
+        title: 'Lunch',
+        start: '2023-02-12T12:00:00'
+      },
+      {
+        title: 'Meeting',
+        start: '2023-02-12T14:29:00'
+      },
+      {
+        title: 'Meeting',
+        start: '2023-02-12T14:30:00'
+      },
+      {
+        title: 'Meeting',
+        start: '2023-02-12T14:31:00'
+      },
+      {
+        title: 'Meeting',
+        start: '2023-02-12T14:32:00'
+      },
+      {
+        title: 'Meeting',
+        start: '2023-02-12T14:33:00'
+      },
+      {
+        title: 'Birthday Party',
+        start: '2023-02-13T07:00:00'
+      },
+      {
+        title: 'Click for Google',
+        url: 'http://google.com/',
+        start: '2023-02-28'
+      }
+    ]
+  });
+
+  calendar.render();
+});
+</script>
 
 
-<div id="calendar"></div>
+
 
 
 <%-include('partials/footer')-%>
