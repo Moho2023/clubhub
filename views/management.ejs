@@ -1,0 +1,21 @@
+<%-include('partials/header', {pagetitle: "Manage"})-%>
+<%-include('partials/navbar')-%>
+
+<h1>Manage</h1>
+
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#myclubs-tab" type="button" role="tab" aria-controls="nav-home" aria-selected="true">My Clubs</button>
+    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#manageclubs-tab" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Clubs I manage</button>
+    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#newclub-tab" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">New Club</button>
+
+  </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="myclubs-tab" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">Here are all my clubs</div>
+  <div class="tab-pane fade" id="manageclubs-tab" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">Here are all the clubs I manage</div>
+  <div class="tab-pane fade" id="newclub-tab" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">Follow these steps to start a new club</div>
+
+</div>
+
+<%-include('partials/footer')-%>

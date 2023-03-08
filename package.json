@@ -1,0 +1,23 @@
+{
+  "name": "clubhub",
+  "version": "1.0.0",
+  "description": "A site for Trinity Students to find, join, and manage clubs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Moho2023/clubhub.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Moho2023/clubhub/issues"
+  },
+  "homepage": "https://github.com/Moho2023/clubhub#readme",
+  "dependencies": {
+    "fullcalendar": "^6.1.4"
+  }
+}
