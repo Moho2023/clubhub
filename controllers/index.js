@@ -1,13 +1,17 @@
 const express = require('express');
 router = express.Router();
-
+const fs = require('fs')
 
 router.get('/', function(request, response) {
+  let eventsJSON = JSON.parse(fs.readFileSync(__dirname+'/../data/events.json'));
+  let eventsArray = eventsJSON.events
+  console.log(eventsArray)
   response.status(200);
   response.setHeader('Content-Type', 'text/html')
   response.render("index", {
-    user: request.user
-  });
+    user: request.user,
+    eventsArray: eventsArray
+    });
 });
 
 router.get('/login', function(request, response) {

@@ -1,0 +1,47 @@
+<%-include('partials/header', {pagetitle: "Manage"})-%>
+<%-include('partials/navbar')-%>
+
+<h1>Admin Dash</h1>
+
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#pending-tab" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Clubs Pending Approval</button>
+    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#budget-tab" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Budget Requests</button>
+    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#approved-budgets-tab" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Approved Budget Requests</button>
+
+  </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="pending-tab" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+
+    <% for(let club in clubs){ %>
+      <% if(clubs[club]["approved"] == false){ %>
+      <%-include('partials/admin_clubcard', {clubname:clubs[club].clubname, clubimage:clubs[club].thumbnail, clubID:clubs[club].clubID})%>
+
+      <% } %>
+    <% } %>
+
+  </div>
+  <div class="tab-pane fade" id="budget-tab" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+<div class="w-75 ms-3 mt-3">
+  <% for(let receipt in receipts){ %>
+    <% if(receipts[receipt]["budget_approved"] == false){ %>
+    <%-include('partials/reimbursement_card', {clubname:clubs[receipts[receipt].clubID].clubname, requestID:receipts[receipt].requestID,clubID:receipts[receipt].clubID, proofofpurchase:receipts[receipt].proofofpurchase, amount: receipts[receipt].amount, advisorEmail:clubs[receipts[receipt].clubID].facultyAdvisorEmail, expenses:receipts[receipt].expenses, budget_approved:receipts[receipt].budget_approved})%>
+
+    <% } %>
+  <% } %>
+  </div>
+</div>
+<div class="tab-pane fade" id="approved-budgets-tab" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+<div class="w-75 ms-3 mt-3">
+<% for(let receipt in receipts){ %>
+  <% if(receipts[receipt]["budget_approved"] == true){ %>
+  <%-include('partials/reimbursement_card', {clubname:clubs[receipts[receipt].clubID].clubname, requestID:receipts[receipt].requestID,clubID:receipts[receipt].clubID, proofofpurchase:receipts[receipt].proofofpurchase, amount: receipts[receipt].amount, advisorEmail:clubs[receipts[receipt].clubID].facultyAdvisorEmail, expenses:receipts[receipt].expenses, budget_approved:receipts[receipt].budget_approved})%>
+
+  <% } %>
+<% } %>
+</div>
+</div>
+</div>
+
+<%-include('partials/footer')-%>

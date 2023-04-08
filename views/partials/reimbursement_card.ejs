@@ -1,0 +1,16 @@
+  <div class="card mt-4 mb-4" style="width: 32rem;">
+    <img src="<%=proofofpurchase%>" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title"><%=clubname%></h5>
+      <p class="card-text"><%=expenses%></p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Requested: $<%=amount%></li>
+      <li class="list-group-item">Faculty advisor: <%=advisorEmail%></li>
+    </ul>
+    <% if(budget_approved == false){ %>
+    <div class="card-body">
+      <a class="btn btn-success" href="/admin/approveBudget/<%=requestID%>" role="button">Mark as approved</a>
+    </div>
+    <% } %>
+  </div>

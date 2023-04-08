@@ -12,10 +12,81 @@
   </div>
 </nav>
 <div class="tab-content" id="nav-tabContent">
-  <div class="tab-pane fade show active" id="myclubs-tab" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">Here are all my clubs</div>
-  <div class="tab-pane fade" id="manageclubs-tab" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">Here are all the clubs I manage</div>
-  <div class="tab-pane fade" id="newclub-tab" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">Follow these steps to start a new club</div>
+  <div class="tab-pane fade show active" id="myclubs-tab" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
 
+    <% for(let club in clubs){ %>
+      <% if(clubs[club]["members"].includes(user._json.email)){ %>
+      <%-include('partials/member_clubcard', {clubname:clubs[club].clubname, clubimage:clubs[club].thumbnail, clubID:clubs[club].clubID})%>
+      <% } %>
+    <% } %>
+
+  </div>
+  <div class="tab-pane fade" id="manageclubs-tab" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+
+    <% for(let club in clubs){ %>
+      <% for(let leader in clubs[club]["leaders"]){%>
+      <% if(clubs[club]["leaders"][leader] == user._json.email){ %>
+
+      <%-include('partials/manage_clubcard', {clubname:clubs[club].clubname, clubimage:clubs[club].thumbnail, approved: clubs[club].approved, clubID: clubs[club].clubID})%>
+        <% } %>
+      <% } %>
+    <% } %>
+
+  </div>
+  <div class="tab-pane fade" id="newclub-tab" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+<div class="w-75 ms-3 mt-3">
+    <form class="row g-3" action="/clubs/createClub" enctype="multipart/form-data" method="POST">
+  <div class="col-md-3">
+    <label for="leader1Email" class="form-label">Leader 1 Email</label>
+    <input name="leader1Email" type="text" class="form-control" id="leader1Email" value="<%=user._json.email%>" required readonly>
+  </div>
+  <div class="col-md-3">
+    <label for="leader2Email" class="form-label">Leader 2 Email</label>
+    <input name="leader2Email" type="text" class="form-control" id="leader2Email" required>
+  </div>
+  <div class="col-md-3">
+    <label for="leader3Email" class="form-label">Leader 3 Email</label>
+    <input name="leader3Email" type="text" value="" class="form-control" id="leader3Email">
+  </div>
+  <div class="col-md-3">
+    <label for="leader4Email" class="form-label">Leader 4 Email</label>
+    <input name="leader4Email" type="text" value="" class="form-control" id="leader4Email">
+  </div>
+  <div class="col-md-4">
+    <label for="advisorEmail" class="form-label">Advisor Email</label>
+    <input name="advisorEmail" type="text" class="form-control" id="advisorEmail" required>
+  </div>
+  <div class="col-md-5">
+    <label for="clubName" class="form-label">Club Name</label>
+      <input name="clubName" type="text" class="form-control" id="clubName" required>
+  </div>
+  <div class="col-md-3">
+    <label for="category" class="form-label">Club Category</label>
+  <select name="category" class="form-select form-control" id="category" required>
+  <option selected>Select Category</option>
+  <option value="forensic">Forensic Team</option>
+  <option value="stem">STEM Club/Program</option>
+  <option value="affinity">Affinity Group</option>
+  <option value="publication">Publication</option>
+  <option value="council">Council</option>
+  <option value="misc">Miscellaneous</option>
+</select>
+</div>
+<div class="col-md-12">
+  <label for="description" class="form-label">Description of Club</label>
+  <textarea name="description" class="form-control" id="description" rows="3"></textarea>
+</div>
+  <div class="col-md-3">
+    <label for="thumbnail" class="form-label">Choose club thumbnail</label>
+    <input type="file" name="thumbnail" id="thumbnail" accept="image/*"/>
+  </div>
+  <div class="col-12">
+    <button type="submit">Submit Club for Approval</button>
+  </div>
+</form>
+
+  </div>
+</div>
 </div>
 
 <%-include('partials/footer')-%>

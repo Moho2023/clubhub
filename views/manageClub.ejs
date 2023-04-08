@@ -1,0 +1,112 @@
+<%-include('partials/header', {pagetitle: "Manage"})-%>
+<%-include('partials/navbar')-%>
+
+<h1>Manage <%=club.clubname%></h1>
+
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <button class="nav-link active" id="nav-info-tab" data-bs-toggle="tab" data-bs-target="#budget-tab" type="button" role="tab" aria-controls="nav-info" aria-selected="false">Upload Receipts</button>
+    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#event-tab" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Create Meetings</button>
+    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#email-tab" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Submit All School Email</button>
+    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#edit-tab" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Edit Club Details</button>
+
+  </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+
+  <div class="tab-pane fade" id="budget-tab" role="tabpanel" aria-labelledby="nav-info-tab" tabindex="0">
+    <div class="w-75 ms-3 mt-3">
+      <h5>Send Reimbursement Request (to nearest dollar)</h5>
+      <form class="row" action="/manage/reimburse" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="clubID" class="form-control" value="<%=club.clubID%>" readonly required>
+        <div class="input-group w-50 mb-4">
+          <span class="input-group-text">$</span>
+          <input type="text" class="form-control" id="money" name="money" aria-label="Amount (to the nearest dollar)">
+          <span class="input-group-text">.00</span>
+        </div>
+        <div class="col-md-3">
+          <label for="receipt" class="form-label">Proof of Purchase</label>
+          <input type="file" name="receipt" id="receipt" accept="image/*"/>
+        </div>
+        <div class="col-md-6">
+          <label for="expenses" class="form-label">List Expenses here</label>
+          <textarea name="expenses" class="form-control" id="expenses" rows="3"></textarea>
+        </div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-success">Submit Request</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="tab-pane fade show active" id="event-tab" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+    <div class="w-75 ms-3 mt-3">
+      <h5>Create New Event</h5>
+      <form class="row" action="/manage/createEvent" method="POST">
+        <input type="hidden" name="clubID" class="form-control" value="<%=club.clubID%>" readonly required>
+        <div class="col-md-2">
+          <input type="text" name="clubname" class="form-control" id="clubname" value="<%=club.clubname%>" required readonly>
+        </div>
+        <div class="col-md-2">
+          <label for="location" class="form-label">Location*</label>
+          <input type="text" name="location" class="form-control" id="location" value="" required>
+        </div>
+        <div class="col-md-2">
+          <label for="date" class="form-label">Date*</label>
+          <input type="date" name="date" value="" required>
+        </div>
+        <div class="col-md-2">
+          <label for="time" class="form-label">Time*</label>
+          <input type="time" name="time" value="" required>
+        </div>
+        <div class="col-12">
+          <button type="submit">Schedule Meeting</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <div class="tab-pane fade" id="edit-tab" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+<div class="w-75 ms-3 mt-3">
+    <form class="row g-3" action="/clubs/updateClub" method="POST">
+      <div class="col-md-3">
+        <input type="text" name="clubID" value="<%=club.clubID%>" class="form-control" required readonly>
+      </div>
+  <div class="col-md-3">
+    <label for="leader1Email" class="form-label">Leader 1 Email*</label>
+    <input name="leader1Email" type="text" class="form-control" id="leader1Email" value="<%=club.leaders.leader1Email%>" required readonly>
+  </div>
+  <div class="col-md-3">
+    <label for="leader2Email" class="form-label">Leader 2 Email*</label>
+    <input name="leader2Email" type="text" class="form-control" id="leader2Email" value="<%=club.leaders.leader2Email%>" required readonly>
+  </div>
+  <div class="col-md-3">
+    <label for="leader3Email" class="form-label">Leader 3 Email</label>
+    <input name="leader3Email" type="text" value="" class="form-control" id="leader3Email" value="<%=club.leaders.leader3Email%>">
+  </div>
+  <div class="col-md-3">
+    <label for="leader4Email" class="form-label">Leader 4 Email</label>
+    <input name="leader4Email" type="text" value="" class="form-control" id="leader4Email" value="<%=club.leaders.leader4Email%>">
+  </div>
+  <div class="col-md-4">
+    <label for="advisorEmail" class="form-label">Advisor Email</label>
+    <input name="advisorEmail" type="text" class="form-control" id="advisorEmail" value="<%=club.facultyAdvisorEmail%>" required readonly>
+  </div>
+  <div class="col-md-5">
+    <label for="clubName" class="form-label">Club Name</label>
+      <input name="clubName" type="text" class="form-control" id="clubName"  value="<%=club.clubname%>" required readonly>
+  </div>
+<div class="col-md-12">
+  <label for="description" class="form-label">Description of Club</label>
+  <textarea name="description" class="form-control" id="description" rows="3"><%=club.description%></textarea>
+</div>
+  <div class="col-12">
+    <button type="submit">Update Club Details</button>
+  </div>
+</form>
+  </div>
+</div>
+</div>
+
+<%-include('partials/footer')-%>

@@ -17,18 +17,14 @@
             Find Clubs
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Forensic Teams</a></li>
-            <li><a class="dropdown-item" href="#">STEM Clubs</a></li>
-            <li><a class="dropdown-item" href="#">Affinity Groups</a></li>
-            <li><a class="dropdown-item" href="#">Publications</a></li>
-            <li><a class="dropdown-item" href="#">Councils</a></li>
-            <li><a class="dropdown-item" href="#">Misc.</a></li>
+            <li><a class="dropdown-item" href="/clubs/forensic">Forensic Teams</a></li>
+            <li><a class="dropdown-item" href="/clubs/stem">STEM Clubs</a></li>
+            <li><a class="dropdown-item" href="/clubs/affinity">Affinity Groups</a></li>
+            <li><a class="dropdown-item" href="/clubs/publication">Publications</a></li>
+            <li><a class="dropdown-item" href="/clubs/council">Councils</a></li>
+            <li><a class="dropdown-item" href="/clubs/misc">Misc.</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="clubs.html">All clubs</a></li>
-            <li><form class="d-flex" role="search">
-              <input class="form-control me-4" type="search" placeholder="Search Club " aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">🔎</button>
-            </form></li>
+            <li><a class="dropdown-item" href="/clubs">All clubs</a></li>
           </ul>
         </li>
       </ul>
@@ -38,13 +34,10 @@
       <form action="/auth/logout" method="POST">
         <button type="submit" class="btn btn-danger ms-1 me-2" style="--bs-btn-padding-y: .15rem; --bs-btn-padding-x: .3rem; --bs-btn-font-size: .55rem;">Log out</button>
       </form>
-      <img src="<%=user._json.picture%>" class="rounded-circle" style="width: 35px;" alt="Avatar" />
+      <img src="<%=user._json.picture%>" class="rounded-circle ripple" style="width: 35px;" alt="Avatar" />
     <%}else{%>
       <div class="me-4"><small>Not Signed In <a href="/login" class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Sign In</a></small></div>
       <%}%>
-
-
-
 
 
     </div>

@@ -1,0 +1,14 @@
+<%-include('partials/header', {pagetitle:"Clubs"})%>
+<%-include('partials/navbar')%>
+
+<h6 class="display-6 ms-5 mt-2"><%=club_category%> organizations</h6>
+
+<% for(let club in clubs){ %>
+  <%  if((club_category == clubs[club].category || club_category == "all") && clubs[club].approved){    %>
+  <%-include('partials/clubcard', {clubname:clubs[club].clubname, clubimage:clubs[club].thumbnail, clubID:clubs[club].clubID})%>
+  <%    }   %>
+<% } %>
+
+
+
+<%-include('partials/footer')%>

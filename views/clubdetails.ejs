@@ -1,0 +1,88 @@
+<%-include('partials/header', {pagetitle: "club details"})-%>
+<%-include('partials/navbar')-%>
+
+<h3 class="text-center display-3 mt-3 mb-3"><%=club.clubname%></h3>
+
+<div class="mx-auto w-50 ">
+<div class="nav nav-tabs nav-justified" id="nav-tab" role="tablist">
+  <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#details-tab" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Club Details</button>
+  <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#meetings-tab" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Meetings</button>
+  <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#announcements-tab" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Announcements</button>
+  <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#roster-tab" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Roster</button>
+
+</div>
+</div>
+
+<div class="w-50 mx-auto">
+<div class="tab-content" id="nav-tabContent">
+
+<div class="tab-pane fade show active" id="details-tab" role="tabpanel" tabindex="0">
+
+
+<div id="carouselExample" class="carousel slide">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="<%=club["thumbnail"]%>" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="https://linklab-uva.github.io/robotlearning/_images/robotlearning.jpeg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="https://linklab-uva.github.io/robotlearning/_images/robotlearning.jpeg" class="d-block w-100" alt="...">
+    </div>
+
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+
+
+<h4 class="text-center mt-4 mb-4">Club details</h4>
+<div class="accordion mb-5" id="accordionPanelsStayOpenExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+        Description
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+      <div class="accordion-body">
+        <%=club["description"]%>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+<div class="tab-pane fade" id="meetings-tab" role="tabpanel" tabindex="0">
+  meet
+</div>
+<div class="tab-pane fade" id="announcements-tab" role="tabpanel" tabindex="0">
+  announce
+</div>
+<div class="tab-pane fade" id="roster-tab" role="tabpanel" tabindex="0">
+  deets
+</div>
+
+
+
+
+</div>
+</div>
+
+
+
+
+
+
+
+<%-include('partials/footer')-%>

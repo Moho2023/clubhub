@@ -2,90 +2,64 @@
 <%-include('partials/navbar')-%>
 
 
-<div class="w-75 mx-auto" id="calendar"></div>
+
+
+<div class="w-75 mx-auto mt-5 mb-5" id="calendar"></div>
 
 <script type="text/javascript">
+  let eventItems = []
+  <% eventsArray.forEach(element => { %>
+    eventItems.push({
+      "title": "<%=element.title%>",
+      "url": "<%=element.url%>",
+      "start": "<%=element.start%>"
+    })
+  <% }) %>
+
+
+  console.log(eventItems)
+
+
   document.addEventListener('DOMContentLoaded', function() {
   var calendarEl = document.getElementById('calendar');
 
+  const date = new Date();
+
+  date.setHours(0, 0, 0, 0);
+
+
+  function padTo2Digits(num) {
+    return num.toString().padStart(2, '0');
+  }
+
+  function formatDate(date) {
+    return [
+      date.getFullYear(),
+      padTo2Digits(date.getMonth() + 1),
+      padTo2Digits(date.getDate()),
+    ].join('-');
+  }
+
+  console.log(formatDate(new Date()));
+
+
+
+
   var calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: 'dayGridMonth',
-    initialDate: '2023-02-07',
+    initialDate: formatDate(new Date()),
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
-      right: 'dayGridMonth,listMonth,listWeek'
+      right: 'dayGridMonth,listMonth'
     },
     dayMaxEventRows: true,
   views: {
     timeGrid: {
-      dayMaxEventRows: 6
+      dayMaxEventRows: 9
     }
   },
-    events: [
-      {
-        title: 'All Day Event',
-        start: '2023-02-01'
-      },
-      {
-        title: 'Long Event',
-        start: '2023-02-07',
-        end: '2023-02-10'
-      },
-      {
-        groupId: '999',
-        title: 'Repeating Event',
-        start: '2023-02-09T16:00:00'
-      },
-      {
-        groupId: '999',
-        title: 'Repeating Event',
-        start: '2023-02-16T16:00:00'
-      },
-      {
-        title: 'Conference',
-        start: '2023-02-11',
-        end: '2023-02-13'
-      },
-      {
-        title: 'Meeting',
-        start: '2023-02-12T10:30:00',
-        end: '2023-02-12T12:30:00'
-      },
-      {
-        title: 'Lunch',
-        start: '2023-02-12T12:00:00'
-      },
-      {
-        title: 'Meeting',
-        start: '2023-02-12T14:29:00'
-      },
-      {
-        title: 'Meeting',
-        start: '2023-02-12T14:30:00'
-      },
-      {
-        title: 'Meeting',
-        start: '2023-02-12T14:31:00'
-      },
-      {
-        title: 'Meeting',
-        start: '2023-02-12T14:32:00'
-      },
-      {
-        title: 'Meeting',
-        start: '2023-02-12T14:33:00'
-      },
-      {
-        title: 'Birthday Party',
-        start: '2023-02-13T07:00:00'
-      },
-      {
-        title: 'Click for Google',
-        url: 'http://google.com/',
-        start: '2023-02-28'
-      }
-    ]
+    events: eventItems
   });
 
   calendar.render();
