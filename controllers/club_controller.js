@@ -98,4 +98,10 @@ router.get('/clubs/join/:clubID', loggedIn, function(request, response){
   response.redirect(`/clubs/viewclub/${request.params.clubID}`)
 })
 
+router.get('/clubs/leave/:clubID', loggedIn, function(request, response){
+  CLUBS.leaveClub(request.params.clubID, request.user._json.email)
+  response.redirect(`/clubs/viewclub/${request.params.clubID}`)
+})
+
+
 module.exports = router

@@ -20,7 +20,7 @@ function admin_only(request, response, next){
   if(ADMIN.isAdmin(request.user._json.email)){
     next();
   } else {
-    response.redirect('/')
+    response.redirect('/error?code=401')
   }
 }
 

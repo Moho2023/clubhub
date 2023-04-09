@@ -36,7 +36,7 @@
 <div class="w-75 ms-3 mt-3">
 <% for(let receipt in receipts){ %>
   <% if(receipts[receipt]["budget_approved"] == true){ %>
-  <%-include('partials/reimbursement_card', {clubname:clubs[receipts[receipt].clubID].clubname, requestID:receipts[receipt].requestID,clubID:receipts[receipt].clubID, proofofpurchase:receipts[receipt].proofofpurchase, amount: receipts[receipt].amount, advisorEmail:clubs[receipts[receipt].clubID].facultyAdvisorEmail, expenses:receipts[receipt].expenses, budget_approved:receipts[receipt].budget_approved})%>
+  <%-include('partials/reimbursement_card', {clubname:clubs[receipts[receipt]["clubID"]]["clubname"], requestID:receipts[receipt].requestID,clubID:receipts[receipt].clubID, proofofpurchase:receipts[receipt].proofofpurchase, amount: receipts[receipt].amount, advisorEmail:clubs[receipts[receipt].clubID].facultyAdvisorEmail, expenses:receipts[receipt].expenses, budget_approved:receipts[receipt].budget_approved})%>
 
   <% } %>
 <% } %>

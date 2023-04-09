@@ -116,6 +116,11 @@ exports.joinClub = function(clubID, email){
   fs.writeFileSync(__dirname+'/../data/clubs.json', JSON.stringify(allClubs))
 }
 
-exports.getUserAnnouncements = function(email){
-
+exports.leaveClub = function(clubID, email){
+  let allClubs = JSON.parse(fs.readFileSync(__dirname+'/../data/clubs.json'));
+  let index = allClubs[clubID].members.indexOf(email);
+  if (index > -1) {
+  allClubs[clubID].members.splice(index, 1);
+  }
+  fs.writeFileSync(__dirname+'/../data/clubs.json', JSON.stringify(allClubs))
 }

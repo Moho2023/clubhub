@@ -42,11 +42,15 @@
 
 <h4 class="text-center mt-4 mb-4">Club details</h4>
 <% if(user){ %>
-<% if(!club["members"].includes(user._json.email)){ %>
+<% if(!club["members"].includes(user._json.email) && club["leaders"].leader1Email != user._json.email && club["leaders"].leader2Email != user._json.email && club["leaders"].leader3Email != user._json.email && club["leaders"].leader4Email != user._json.email && club.facultyAdvisorEmail != user._json.email){ %>
   <div class="mx-auto mb-3">
 <a class="btn btn-success" href="/clubs/join/<%=club.clubID%>" role="button">+ Join Club +</a>
 </div>
-<% } %>
+<% } else { %>
+  <div class="mx-auto mb-3">
+  <a class="btn btn-danger" href="/clubs/leave/<%=club.clubID%>" role="button">- Leave Club -</a>
+  </div>
+  <%}%>
 <% } %>
 <div class="accordion mb-5" id="accordionPanelsStayOpenExample">
   <div class="accordion-item">

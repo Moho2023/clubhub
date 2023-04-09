@@ -30,6 +30,10 @@
       <%-include('partials/manage_clubcard', {clubname:clubs[club].clubname, clubimage:clubs[club].thumbnail, approved: clubs[club].approved, clubID: clubs[club].clubID})%>
         <% } %>
       <% } %>
+        <% if(clubs[club].facultyAdvisorEmail == user._json.email){ %>
+          <%-include('partials/manage_clubcard', {clubname:clubs[club].clubname, clubimage:clubs[club].thumbnail, approved: clubs[club].approved, clubID: clubs[club].clubID})%>
+        <% } %>
+
     <% } %>
 
   </div>
@@ -81,7 +85,7 @@
     <input type="file" name="thumbnail" id="thumbnail" accept="image/*"/>
   </div>
   <div class="col-12">
-    <button type="submit">Submit Club for Approval</button>
+    <button class="btn btn-primary" type="submit">Submit Club for Approval</button>
   </div>
 </form>
 
