@@ -22,7 +22,7 @@
     "clubImages": [
       "https://drive.google.com/uc?export=view&id=1mfKk-_k0TqsCq-TuwFKT5OaBUWrnXN-Y"
     ],
-    "announcements":[],
+    "announcements": [],
     "emails": []
   },
   "emwwXGoEZZU7xJ8ShUTnZv": {
@@ -48,7 +48,7 @@
     "clubImages": [
       "https://drive.google.com/uc?export=view&id=1pMwkYGLSJ258UAtqdv3MUY3LST4kV5EL"
     ],
-    "announcements":[],
+    "announcements": [],
     "emails": []
   },
   "dhQbhHJDkG9fDKkxEd1NoM": {
@@ -74,7 +74,7 @@
     "clubImages": [
       "https://drive.google.com/uc?export=view&id=1p_4x6mJaC7i3seIFRjGlhFxrSjxGYn3T"
     ],
-    "announcements":[],
+    "announcements": [],
     "emails": []
   },
   "tm9D87QgcMLKZJ6heqKjds": {
@@ -100,7 +100,7 @@
     "clubImages": [
       "https://drive.google.com/uc?export=view&id=1gXoBhQHsQSHkMatHMjNVt-Pd_sjOPfoy"
     ],
-    "announcements":[],
+    "announcements": [],
     "emails": []
   },
   "a1LXbxpY1jkR5avHiUPSf7": {
@@ -126,7 +126,7 @@
     "clubImages": [
       "https://drive.google.com/uc?export=view&id=1g4XeOmwSKcS0Uq8gLHrs9cQL73ZGRplg"
     ],
-    "announcements":[],
+    "announcements": [],
     "emails": []
   },
   "k5PWUB9SfekgSL1cEbXo82": {
@@ -152,7 +152,7 @@
     "clubImages": [
       "https://drive.google.com/uc?export=view&id=1qhDnQ3uEjrR5uxBhSElQOf_WaJQJjGNL"
     ],
-    "announcements":[],
+    "announcements": [],
     "emails": []
   },
   "imjcHDnwaxwDjCN9AobhBB": {
@@ -178,7 +178,33 @@
     "clubImages": [
       "https://drive.google.com/uc?export=view&id=12Vy8eY6FI0mLpbVNXoQ6QzCJ1bx3HKgP"
     ],
-    "announcements":[],
+    "announcements": [],
+    "emails": []
+  },
+  "3XoAzEkDoegy8Dbdytf5kb": {
+    "clubname": "Anti-Climate activists",
+    "clubID": "3XoAzEkDoegy8Dbdytf5kb",
+    "category": "affinity",
+    "facultyAdvisorEmail": "mohammed.sami23@trinityschoolnyc.org",
+    "approved": true,
+    "description": "Burn, baby (world), burn. ",
+    "thumbnail": "https://drive.google.com/uc?export=view&id=1Za3XxH60RqIu5uwoSRGACwumfS8glh-u",
+    "leaders": {
+      "leader1Email": "mohammed.sami23@trinityschoolnyc.org",
+      "leader2Email": "ian.kopke23@trinityschoolnyc.org",
+      "leader3Email": "",
+      "leader4Email": ""
+    },
+    "members": [
+      "mohammed.sami23@trinityschoolnyc.org",
+      "ian.kopke23@trinityschoolnyc.org",
+      "",
+      ""
+    ],
+    "clubImages": [
+      "https://drive.google.com/uc?export=view&id=1Za3XxH60RqIu5uwoSRGACwumfS8glh-u"
+    ],
+    "announcements": [],
     "emails": []
   }
 }

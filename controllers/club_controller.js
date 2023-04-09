@@ -53,11 +53,13 @@ router.get('/clubs/:category', function(request, response){
 router.get('/clubs/viewclub/:clubID', function(request, response){
   let clubID = request.params.clubID;
   let club = CLUBS.getClub(clubID);
+  let clubEvents = CLUBS.getClubEvents(clubID)
   response.status(200);
   response.setHeader('Content-Type', 'text/html');
   response.render('clubdetails', {
     user: request.user,
-    club: club
+    club: club,
+    eventsArray: clubEvents
   });
 })
 

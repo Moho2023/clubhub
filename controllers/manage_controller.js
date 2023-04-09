@@ -6,7 +6,6 @@ const MANAGE = require('../models/manage_model.js');
 const ejs = require("ejs")
 const fs = require('fs');
 
-
 function loggedIn(request, response, next) {
   if (request.user) {
     next();
@@ -79,6 +78,20 @@ router.post('/manage/reimburse', loggedIn, privateUpload.any(), async function(r
   } else {
     response.redirect('/')
   }
+})
+
+router.post('/manage/announce', loggedIn, function(request, response){
+  let announcement = request.body;
+  let clubID = announcement.clubID;
+  if(MANAGE.isLeader(request.user._json.email, clubID)){
+  let now = new Date();
+  MANAGE.createAnnouncement(announcement, now);
+  response.status(200);
+  response.setHeader('Content-Type', 'text/html')
+  reponse.redirect(`/manage/${request.body.clubID}`)
+} else {
+  response.redirect('/')
+}
 })
 
 module.exports = router

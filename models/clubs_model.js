@@ -64,7 +64,9 @@ exports.createClub = async function(prop, file){
     'leader4Email': prop.leaders[3]
   },
   "members": prop.leaders, //start with only members being the leaders
-  "clubImages": [thumbnail] //start with just the image of the thumbnail
+  "clubImages": [thumbnail], //start with just the image of the thumbnail
+  "announcements": [],
+  "emails": []
   }
   allClubs[newClubID] = newClub;
   fs.writeFileSync(__dirname+'/../data/clubs.json', JSON.stringify(allClubs));
@@ -85,4 +87,22 @@ exports.updateClub = function(updates){
 exports.getClub = function(clubID){
   let allClubs = JSON.parse(fs.readFileSync(__dirname+'/../data/clubs.json'));
   return allClubs[clubID];
+}
+
+exports.getClubEvents = function(clubID){
+  let allEventsJSON = JSON.parse(fs.readFileSync(__dirname+'/../data/events.json'));
+  let allEvents = allEventsJSON.events //array
+  let arrayOfClubEvents = []
+  allEvents.forEach(element => {
+    let url = element.url
+    let clubIDFromUrl = url.slice(16);
+    if(clubIDFromUrl == clubID){
+    arrayOfClubEvents.push({
+      "title": element.title,
+      "url": element.url,
+      "start": element.start
+    })
+  }
+   })
+   return arrayOfClubEvents
 }

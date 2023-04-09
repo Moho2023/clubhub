@@ -7,14 +7,14 @@
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
     <button class="nav-link active" id="nav-info-tab" data-bs-toggle="tab" data-bs-target="#budget-tab" type="button" role="tab" aria-controls="nav-info" aria-selected="false">Upload Receipts</button>
     <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#event-tab" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Create Meetings</button>
-    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#email-tab" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Submit All School Email</button>
+    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#announce-tab" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">New Announcement</button>
     <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#edit-tab" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Edit Club Details</button>
 
   </div>
 </nav>
 <div class="tab-content" id="nav-tabContent">
 
-  <div class="tab-pane fade" id="budget-tab" role="tabpanel" aria-labelledby="nav-info-tab" tabindex="0">
+  <div class="tab-pane fade show active" id="budget-tab" role="tabpanel" aria-labelledby="nav-info-tab" tabindex="0">
     <div class="w-75 ms-3 mt-3">
       <h5>Send Reimbursement Request (to nearest dollar)</h5>
       <form class="row" action="/manage/reimburse" method="POST" enctype="multipart/form-data">
@@ -32,14 +32,14 @@
           <label for="expenses" class="form-label">List Expenses here</label>
           <textarea name="expenses" class="form-control" id="expenses" rows="3"></textarea>
         </div>
-        <div class="col-12">
+        <div class="col-12 mt-3">
           <button type="submit" class="btn btn-success">Submit Request</button>
         </div>
       </form>
     </div>
   </div>
 
-  <div class="tab-pane fade show active" id="event-tab" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+  <div class="tab-pane fade show" id="event-tab" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="1">
     <div class="w-75 ms-3 mt-3">
       <h5>Create New Event</h5>
       <form class="row" action="/manage/createEvent" method="POST">
@@ -63,6 +63,33 @@
           <button type="submit">Schedule Meeting</button>
         </div>
       </form>
+    </div>
+  </div>
+
+
+  <div class="tab-pane fade show" id="announce-tab" role="tabpanel" aria-labelledby="nav-announce-tab" tabindex="2">
+    <div class="w-100 ms-3 mt-3">
+      <h5>Post announcement</h5>
+
+
+      <form class="row" action="/manage/announce" method="POST">
+        <input type="hidden" name="clubID" class="form-control" value="<%=club.clubID%>" readonly required>
+        <div class="col-sm-6 me-3 mb-3">
+          <label for="subject">Announcement Subject</label>
+          <input type="text" name="subject" class="form-control" id="subject" value="" required>
+        </div>
+        <div class="col-sm-6 me-3 mb-3">
+          <label for="announcement" class="form-label">Announcement Text*</label>
+          <textarea name="announcement" class="form-control" id="announcement" rows="8"></textarea>
+        </div>
+        <div class="col-12">
+          <button class="btn btn-primary" type="submit">Post announcement</button>
+        </div>
+      </form>
+
+
+
+
     </div>
   </div>
 

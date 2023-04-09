@@ -1,6 +1,7 @@
 const fs = require("fs");
 const short = require("short-uuid");
-
+const dateTime = require("date-and-time")
+const CLUBS = require('./clubs_model.js')
 const {google} = require('googleapis');
 const KEYS = __dirname+"/../config/credentials.json";
 const SCOPES = ['https://www.googleapis.com/auth/drive'];
@@ -16,11 +17,27 @@ exports.getAllClubs = function(){
 }
 
 
+exports.createAnnouncement = function(announcement_deets, datetime){
+  let clubID = announcement_deets.clubID
+  let allClubs = exports.getAllClubs()
+  let announcement_item = {
+    "subject": announcement_deets.subject,
+    "announcement": announcement_deets.annnouncement,
+    "date": dateTime.format(datetime, 'ddd MMMM DD YYYY at hh:mm A')
+  }
+  allClubs[clubID].announcements.push(announcement_item);
+  fs.writeFileSync(__dirname+'/../data/clubs.json', JSON.stringify(allClubs));
+}
+
 exports.sendEmailAnnouncement = function(){
   return 0;
 }
 
-
+exports.getUserRole = function(email){
+  let allEmails = JSON.parse(fs.readFileSync(__dirname+'/../data/emails.json'));
+  let role = allEmails.email
+  return allEmails
+}
 
 exports.createEvent = function(eventDetails){
   let allEvents = JSON.parse(fs.readFileSync(__dirname+'/../data/events.json'));
