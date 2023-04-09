@@ -97,7 +97,29 @@ router.post('/manage/announce', loggedIn, function(request, response){
 })
 
 router.post('/manage/sendToAdvisor', loggedIn, function(request, response){
-  cons
+  let email_content = request.body
+  let clubID = email_content.clubID
+  if(MANAGE.isLeader(request.user._json.email, clubID) && MANAGE.isApproved(clubID)){
+    MANAGE.handleEmailDraft(email_content);
+    response.status(200);
+    response.setHeader('Content-Type', 'text/html')
+    response.redirect(`/manage/${request.body.clubID}`)
+  } else {
+    response.redirect('/')
+  }
+})
+
+router.post('/manage/sendEmail', loggedIn, function(request, response){
+  let email_content = request.body
+  let clubID = email_content.clubID
+  if(MANAGE.isLeader(request.user._json.email, clubID) && MANAGE.isApproved(clubID)){
+    MANAGE.sendEmailAnnouncement(email_content);
+    response.status(200);
+    response.setHeader('Content-Type', 'text/html')
+    response.redirect(`/manage/${request.body.clubID}`)
+  } else {
+    response.redirect('/error?code=401');
+  }
 })
 
 module.exports = router

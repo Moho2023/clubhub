@@ -1,6 +1,7 @@
 const express = require('express');
 router = express.Router();
 const fs = require('fs')
+const CLUBS = require('../models/clubs_model.js')
 
 router.get('/', function(request, response) {
   let eventsJSON = JSON.parse(fs.readFileSync(__dirname+'/../data/events.json'));
@@ -10,7 +11,8 @@ router.get('/', function(request, response) {
   response.setHeader('Content-Type', 'text/html')
   response.render("index", {
     user: request.user,
-    eventsArray: eventsArray
+    eventsArray: eventsArray,
+    clubs: CLUBS.getAllClubs()
     });
 });
 

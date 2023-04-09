@@ -2,6 +2,9 @@ const fs = require("fs");
 const short = require("short-uuid");
 const dateTime = require("date-and-time")
 const CLUBS = require('./clubs_model.js')
+const mailgun = require("mailgun-js");
+const DOMAIN = 'sandbox6e2cdfc11062463698b52015a888e47e.mailgun.org';
+const mg = mailgun({apiKey: "fb6ff2b1b56d7e15334d65abbc9751d7-81bd92f8-adca9d5b", domain: DOMAIN});
 const {google} = require('googleapis');
 const KEYS = __dirname+"/../config/credentials.json";
 const SCOPES = ['https://www.googleapis.com/auth/drive'];
@@ -29,8 +32,51 @@ exports.createAnnouncement = function(announcement_deets, datetime){
   fs.writeFileSync(__dirname+'/../data/clubs.json', JSON.stringify(allClubs));
 }
 
-exports.sendEmailAnnouncement = function(){
-  return 0;
+exports.getAllEmailRecipients = function(){
+  let allEmails = JSON.parse(fs.readFileSync(__dirname+'/../data/emails.json'));
+  let arr = []
+  for(let i in allEmails){
+    arr.push(i)
+  }
+  return arr
+}
+
+exports.sendEmailAnnouncement = function(approvedEmail){
+  let clubID = approvedEmail.clubID
+  let allClubs = JSON.parse(fs.readFileSync(__dirname+'/../data/clubs.json'));
+  for(let d in allClubs[clubID].emails){
+    if(allClubs[clubID].emails[d].draftID == approvedEmail.draftID){
+      allClubs[clubID].emails[d].emailsubject = approvedEmail.emailsubject
+      allClubs[clubID].emails[d].emaildraft = approvedEmail.emaildraft
+      allClubs[clubID].emails[d].approved = true
+      console.log(allClubs[clubID].emails[d])
+      console.log("ready to email out")
+      fs.writeFileSync(__dirname+'/../data/clubs.json', JSON.stringify(allClubs));
+
+      const data = {
+      	from: `${allClubs[clubID].clubname} <trinclubs@gmail.com>`,
+      	to: exports.getAllEmailRecipients(),
+      	subject: `Club Registrar: ${approvedEmail.emailsubject}`,
+      	text: approvedEmail.emaildraft
+      };
+      mg.messages().send(data, function (error, body) {
+      	console.log(body);
+      });
+
+    }
+  }
+}
+
+exports.handleEmailDraft = function(email_content){
+  let allClubs = JSON.parse(fs.readFileSync(__dirname+'/../data/clubs.json'));
+  let email_object = {
+    "emailsubject": email_content.emailsubject,
+    "emaildraft": email_content.emaildraft,
+    "approved": false,
+    "draftID": short.generate()
+  }
+  allClubs[email_content.clubID].emails.unshift(email_object)
+  fs.writeFileSync(__dirname+'/../data/clubs.json', JSON.stringify(allClubs))
 }
 
 exports.getUserRole = function(useremail){

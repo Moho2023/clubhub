@@ -109,3 +109,13 @@ exports.getClubEvents = function(clubID){
    })
    return arrayOfClubEvents
 }
+
+exports.joinClub = function(clubID, email){
+  let allClubs = JSON.parse(fs.readFileSync(__dirname+'/../data/clubs.json'));
+  allClubs[clubID].members.push(email);
+  fs.writeFileSync(__dirname+'/../data/clubs.json', JSON.stringify(allClubs))
+}
+
+exports.getUserAnnouncements = function(email){
+
+}

@@ -11,6 +11,10 @@
     <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#email-tab" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Draft All School Email</button>
     <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#edit-tab" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Edit Club Details</button>
 
+    <% if(userRole == "faculty"){ %>
+      <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#pendingemails-tab" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Pending All School Email Drafts</button>
+    <%}%>
+
   </div>
 </nav>
 <div class="tab-content" id="nav-tabContent">
@@ -110,10 +114,44 @@
           <label for="emaildraft" class="form-label">Email Draft*</label>
           <textarea name="emaildraft" class="form-control" id="emaildraft" rows="8"></textarea>
         </div>
-        <div class="col-12">
+        <div class="col-12 mb-3">
           <button class="btn btn-primary" type="submit">Send Draft To Advisor for Approval</button>
         </div>
       </form>
+      <h5>Approved and Sent Emails</h5>
+      <%for(let i in club.emails){%>
+        <%if(club.emails[i].approved){%>
+          <div class="alert alert-success mt-3 w-50" role="alert">
+            <h5><%=club.emails[i].emailsubject%></h5>
+            <p><%=club.emails[i].emaildraft%></p>
+          </div>
+          <%}%>
+        <%}%>
+    </div>
+  </div>
+
+  <div class="tab-pane fade show" id="pendingemails-tab" role="tabpanel" aria-labelledby="nav-email-tab" tabindex="2">
+    <div class="w-100 ms-3 mt-3">
+      <h5>Drafted Emails</h5>
+      <% for(let draft in club.emails){ %>
+        <% if(!club.emails[draft].approved){ %>
+      <form class="row" action="/manage/sendEmail" method="POST">
+        <input type="hidden" name="clubID" class="form-control" value="<%=club.clubID%>" readonly required>
+        <input type="hidden" name="draftID" class="form-control" value="<%=club.emails[draft].draftID%>" readonly required>
+        <div class="col-md-6 mt-2 mb-2 me-4">
+          <label for="emailsubject" class="form-label">Email Subject</label>
+          <input type="text" name="emailsubject" class="form-control" id="emailsubject" value="<%=club.emails[draft].emailsubject%>">
+        </div>
+        <div class="col-md-6 mt-2 mb-2">
+          <label for="emaildraft" class="form-label">Email Draft*</label>
+          <textarea name="emaildraft" class="form-control" id="emaildraft" rows="8"><%=club.emails[draft].emaildraft%></textarea>
+        </div>
+        <div class="col-12">
+          <button class="btn btn-success" type="submit">Approve</button>
+        </div>
+      </form>
+      <%}%>
+      <%}%>
     </div>
   </div>
 

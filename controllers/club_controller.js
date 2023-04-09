@@ -93,5 +93,9 @@ router.post('/clubs/updateClub', loggedIn, function(request, response){
   }
 })
 
+router.get('/clubs/join/:clubID', loggedIn, function(request, response){
+  CLUBS.joinClub(request.params.clubID, request.user._json.email)
+  response.redirect(`/clubs/viewclub/${request.params.clubID}`)
+})
 
 module.exports = router

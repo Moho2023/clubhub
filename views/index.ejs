@@ -1,10 +1,36 @@
 <%-include('partials/header', {pagetitle: "Home"})-%>
 <%-include('partials/navbar')-%>
 
-
+<div class="alert alert-warning d-flex align-items-center w-50 mx-auto pt-0 pb-0 mt-4" role="alert">
+  <div class="mx-auto"><a href="#club-alerts">Scroll down to view club announcements</a></div>
+</div>
 
 
 <div class="w-75 mx-auto mt-5 mb-5" id="calendar"></div>
+<div class="mb-5" id="club-alerts">
+  <h6 class="display-6 text-center">Club Announcements</h6>
+<% if(user){ %>
+  <% for(let club in clubs){ %>
+    <% if(clubs[club]["members"].includes(user._json.email) || clubs[club]["leaders"].leader1Email == user._json.email || clubs[club]["leaders"].leader2Email == user._json.email || clubs[club]["leaders"].leader3Email == user._json.email || clubs[club]["leaders"].leader4Email == user._json.email || clubs[club].facultyAdvisorEmail == user._json.email){ %>
+      <% if(clubs[club].announcements[0]){ %>
+      <div class="card w-75 mx-auto mt-3">
+        <div class="card-header">
+          <strong><%=clubs[club].announcements[0].date%></strong>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"><%=clubs[club].announcements[0].subject%></h5>
+          <p class="card-text"><%=clubs[club].announcements[0].announcement%></p>
+        </div>
+      </div>
+      <% } %>
+    <% } %>
+  <% } %>
+<% } else { %>
+  <div class="alert alert-warning w-75 mx-auto mt-5 mb-5" role="alert">
+    Log in to view updates and announcements from your clubs
+  </div>
+<% } %>
+</div>
 
 <script type="text/javascript">
   let eventItems = []
