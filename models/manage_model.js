@@ -22,10 +22,10 @@ exports.createAnnouncement = function(announcement_deets, datetime){
   let allClubs = exports.getAllClubs()
   let announcement_item = {
     "subject": announcement_deets.subject,
-    "announcement": announcement_deets.annnouncement,
+    "announcement": announcement_deets.announcement,
     "date": dateTime.format(datetime, 'ddd MMMM DD YYYY at hh:mm A')
   }
-  allClubs[clubID].announcements.push(announcement_item);
+  allClubs[clubID].announcements.unshift(announcement_item);
   fs.writeFileSync(__dirname+'/../data/clubs.json', JSON.stringify(allClubs));
 }
 
@@ -33,10 +33,10 @@ exports.sendEmailAnnouncement = function(){
   return 0;
 }
 
-exports.getUserRole = function(email){
+exports.getUserRole = function(useremail){
   let allEmails = JSON.parse(fs.readFileSync(__dirname+'/../data/emails.json'));
-  let role = allEmails.email
-  return allEmails
+  let role = allEmails[useremail]
+  return role
 }
 
 exports.createEvent = function(eventDetails){

@@ -46,11 +46,13 @@ router.get('/manage/new', loggedIn, function(request, response){
 router.get('/manage/:clubID', loggedIn, function(request, response){
   let clubID = request.params.clubID;
   if(MANAGE.isLeader(request.user._json.email, clubID)){
+    console.log(MANAGE.getUserRole(request.user._json.email))
     response.status(200);
     response.setHeader('Content-Type', 'text/html')
     response.render("manageClub", {
       user: request.user,
-      club: CLUBS.getClub(clubID)
+      club: CLUBS.getClub(clubID),
+      userRole: MANAGE.getUserRole(request.user._json.email)
     })
   } else {
     response.redirect("/")
@@ -88,10 +90,14 @@ router.post('/manage/announce', loggedIn, function(request, response){
   MANAGE.createAnnouncement(announcement, now);
   response.status(200);
   response.setHeader('Content-Type', 'text/html')
-  reponse.redirect(`/manage/${request.body.clubID}`)
+  response.redirect(`/manage/${request.body.clubID}`)
 } else {
   response.redirect('/')
 }
+})
+
+router.post('/manage/sendToAdvisor', loggedIn, function(request, response){
+  cons
 })
 
 module.exports = router

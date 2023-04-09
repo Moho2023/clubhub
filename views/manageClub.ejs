@@ -8,6 +8,7 @@
     <button class="nav-link active" id="nav-info-tab" data-bs-toggle="tab" data-bs-target="#budget-tab" type="button" role="tab" aria-controls="nav-info" aria-selected="false">Upload Receipts</button>
     <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#event-tab" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Create Meetings</button>
     <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#announce-tab" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">New Announcement</button>
+    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#email-tab" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Draft All School Email</button>
     <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#edit-tab" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Edit Club Details</button>
 
   </div>
@@ -94,20 +95,61 @@
   </div>
 
 
+
+
+  <div class="tab-pane fade show" id="email-tab" role="tabpanel" aria-labelledby="nav-email-tab" tabindex="2">
+    <div class="w-100 ms-3 mt-3">
+      <h5>All School Email</h5>
+      <form class="row" action="/manage/sendToAdvisor" method="POST">
+        <input type="hidden" name="clubID" class="form-control" value="<%=club.clubID%>" readonly required>
+        <div class="col-md-6 mt-2 mb-2 me-4">
+          <label for="emailsubject" class="form-label">Email Subject</label>
+          <input type="text" name="emailsubject" class="form-control" id="emailsubject" value="">
+        </div>
+        <div class="col-md-6 mt-2 mb-2">
+          <label for="emaildraft" class="form-label">Email Draft*</label>
+          <textarea name="emaildraft" class="form-control" id="emaildraft" rows="8"></textarea>
+        </div>
+        <div class="col-12">
+          <button class="btn btn-primary" type="submit">Send Draft To Advisor for Approval</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
   <div class="tab-pane fade" id="edit-tab" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
 <div class="w-75 ms-3 mt-3">
     <form class="row g-3" action="/clubs/updateClub" method="POST">
       <div class="col-md-3">
         <input type="text" name="clubID" value="<%=club.clubID%>" class="form-control" required readonly>
       </div>
+
+  <%if(userRole == "faculty"){%>
   <div class="col-md-3">
     <label for="leader1Email" class="form-label">Leader 1 Email*</label>
-    <input name="leader1Email" type="text" class="form-control" id="leader1Email" value="<%=club.leaders.leader1Email%>" required readonly>
+    <input name="leader1Email" type="text" class="form-control" id="leader1Email" value="<%=club.leaders.leader1Email%>" required>
   </div>
+  <%} else {%>
+    <div class="col-md-3">
+      <label for="leader1Email" class="form-label">Leader 1 Email*</label>
+      <input name="leader1Email" type="text" class="form-control" id="leader1Email" value="<%=club.leaders.leader1Email%>" required readonly>
+    </div>
+    <%}%>
+
+  <%if(userRole == "faculty"){%>
   <div class="col-md-3">
     <label for="leader2Email" class="form-label">Leader 2 Email*</label>
-    <input name="leader2Email" type="text" class="form-control" id="leader2Email" value="<%=club.leaders.leader2Email%>" required readonly>
+    <input name="leader2Email" type="text" class="form-control" id="leader2Email" value="<%=club.leaders.leader2Email%>" required>
   </div>
+  <% } else {%>
+    <div class="col-md-3">
+      <label for="leader2Email" class="form-label">Leader 2 Email*</label>
+      <input name="leader2Email" type="text" class="form-control" id="leader2Email" value="<%=club.leaders.leader2Email%>" required readonly>
+    </div>
+    <%}%>
+
+
   <div class="col-md-3">
     <label for="leader3Email" class="form-label">Leader 3 Email</label>
     <input name="leader3Email" type="text" value="" class="form-control" id="leader3Email" value="<%=club.leaders.leader3Email%>">
@@ -116,14 +158,32 @@
     <label for="leader4Email" class="form-label">Leader 4 Email</label>
     <input name="leader4Email" type="text" value="" class="form-control" id="leader4Email" value="<%=club.leaders.leader4Email%>">
   </div>
+
+  <%if(userRole == "faculty"){%>
   <div class="col-md-4">
     <label for="advisorEmail" class="form-label">Advisor Email</label>
-    <input name="advisorEmail" type="text" class="form-control" id="advisorEmail" value="<%=club.facultyAdvisorEmail%>" required readonly>
+    <input name="advisorEmail" type="text" class="form-control" id="advisorEmail" value="<%=club.facultyAdvisorEmail%>" required>
   </div>
+  <%} else {%>
+    <div class="col-md-4">
+      <label for="advisorEmail" class="form-label">Advisor Email</label>
+      <input name="advisorEmail" type="text" class="form-control" id="advisorEmail" value="<%=club.facultyAdvisorEmail%>" required readonly>
+    </div>
+<%}%>
+
+<%if(userRole == "faculty"){%>
+  <div class="col-md-5">
+    <label for="clubName" class="form-label">Club Name</label>
+      <input name="clubName" type="text" class="form-control" id="clubName"  value="<%=club.clubname%>" required>
+  </div>
+<%} else {%>
   <div class="col-md-5">
     <label for="clubName" class="form-label">Club Name</label>
       <input name="clubName" type="text" class="form-control" id="clubName"  value="<%=club.clubname%>" required readonly>
   </div>
+  <%}%>
+
+
 <div class="col-md-12">
   <label for="description" class="form-label">Description of Club</label>
   <textarea name="description" class="form-control" id="description" rows="3"><%=club.description%></textarea>

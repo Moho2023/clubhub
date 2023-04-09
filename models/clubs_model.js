@@ -63,7 +63,7 @@ exports.createClub = async function(prop, file){
     'leader3Email': prop.leaders[2],
     'leader4Email': prop.leaders[3]
   },
-  "members": prop.leaders, //start with only members being the leaders
+  "members": [], //start with only members being the leaders
   "clubImages": [thumbnail], //start with just the image of the thumbnail
   "announcements": [],
   "emails": []
@@ -76,9 +76,12 @@ exports.createClub = async function(prop, file){
 exports.updateClub = function(updates){
   let clubID = updates.clubID
   let allClubs = JSON.parse(fs.readFileSync(__dirname+'/../data/clubs.json'));
+  allClubs[clubID].leaders.leader1Email = updates.leader1Email
+  allClubs[clubID].leaders.leader2Email = updates.leader2Email
   allClubs[clubID].leaders.leader3Email = updates.leader3Email
   allClubs[clubID].leaders.leader4Email = updates.leader4Email
   allClubs[clubID].description = updates.description
+  allClubs[clubID].clubname = updates.clubName
   fs.writeFileSync(__dirname+'/../data/clubs.json', JSON.stringify(allClubs))
   console.log(allClubs[clubID])
 }
