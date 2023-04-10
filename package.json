@@ -19,6 +19,7 @@
   "homepage": "https://github.com/Moho2023/clubhub#readme",
   "dependencies": {
     "date-and-time": "^2.4.3",
+    "dotenv": "^16.0.3",
     "fullcalendar": "^6.1.4",
     "googleapis": "^114.0.0",
     "mailgun-js": "^0.22.0",

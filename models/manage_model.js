@@ -1,10 +1,10 @@
 const fs = require("fs");
 const short = require("short-uuid");
+var dotenv = require("dotenv");
+dotenv.config();
+const nodemailer = require("nodemailer")
 const dateTime = require("date-and-time")
 const CLUBS = require('./clubs_model.js')
-const mailgun = require("mailgun-js");
-const DOMAIN = 'sandbox6e2cdfc11062463698b52015a888e47e.mailgun.org';
-const mg = mailgun({apiKey: "fb6ff2b1b56d7e15334d65abbc9751d7-81bd92f8-adca9d5b", domain: DOMAIN});
 const {google} = require('googleapis');
 const KEYS = __dirname+"/../config/credentials.json";
 const SCOPES = ['https://www.googleapis.com/auth/drive'];
@@ -13,6 +13,16 @@ const auth = new google.auth.GoogleAuth({
     scopes: SCOPES
 });
 const driveService = google.drive({version: 'v3', auth});
+
+let transporter = nodemailer.createTransport({
+  service: 'gmail',
+  host: 'smtp.gmail.com',
+  secure: false,
+  auth: {
+    user: 'trinclubs@gmail.com',
+    pass: 'ouahqqsdeonvetuo'
+  }
+})
 
 exports.getAllClubs = function(){
   let allClubs = JSON.parse(fs.readFileSync(__dirname+'/../data/clubs.json'));
@@ -57,11 +67,11 @@ exports.sendEmailAnnouncement = function(approvedEmail){
       	from: `${allClubs[clubID].clubname} <trinclubs@gmail.com>`,
       	to: exports.getAllEmailRecipients(),
       	subject: `Club Registrar: ${approvedEmail.emailsubject}`,
-      	text: approvedEmail.emaildraft
+      	text: approvedEmail.emaildraft,
+        html: `${approvedEmail.emaildraft}`
       };
-      mg.messages().send(data, function (error, body) {
-      	console.log(body);
-      });
+      
+      transporter.sendMail(data)
 
     }
   }
