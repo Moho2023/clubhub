@@ -25,6 +25,7 @@
     "mailgun-js": "^0.22.0",
     "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.9.1",
-    "short-uuid": "^4.2.2"
+    "short-uuid": "^4.2.2",
+    "sqlite3": "^5.1.6"
   }
 }
