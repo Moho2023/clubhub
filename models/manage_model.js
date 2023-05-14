@@ -13,6 +13,7 @@ const auth = new google.auth.GoogleAuth({
     scopes: SCOPES
 });
 const driveService = google.drive({version: 'v3', auth});
+let serviceskey = JSON.parse(fs.readFileSync(__dirname+'/../config/googleservices_auth.json'))["key"];
 
 let transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -20,7 +21,7 @@ let transporter = nodemailer.createTransport({
   secure: false,
   auth: {
     user: 'trinclubs@gmail.com',
-    pass: 'ouahqqsdeonvetuo'
+    pass: serviceskey
   }
 })
 
