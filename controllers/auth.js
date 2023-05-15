@@ -6,6 +6,8 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const KEYS = require('../config/keys.json');
 const ADMIN = require('../models/admin_model.js');
+const sqlite3 = require('sqlite3').verbose();
+const db = new sqlite3.Database(__dirname+'/../data/admin_dash.db');
 //keeping our secrets out of our main application is a security best practice
 //we can add /config/keys.json to our .gitignore file so that we keep it local/private
 
@@ -62,6 +64,15 @@ router.get('/auth/google/callback',
     let timern = new Date();
     login_history[timern] = userProfile;
     fs.writeFileSync(__dirname+'/../config/user_login_history.json', JSON.stringify(login_history)); //log everyone who logs in into json file
+    db.serialize(() => {
+      db.run("INSERT INTO logs (useremail, userevent) VALUES (?, ?)",
+        userProfile._json.email,
+        'logged in',
+        function(err){
+          if(err) { throw err;}
+        }
+      )
+    })
     response.redirect('/');
   });
 
