@@ -83,6 +83,15 @@ router.post('/auth/logout', function(req, res, next) {
     if (err) { return next(err); }
     res.redirect('/login');
   });
+  db.serialize(() => {
+    db.run("INSERT INTO logs (useremail, userevent) VALUES (?, ?)",
+      userProfile._json.email,
+      'logged out',
+      function(err){
+        if(err) { throw err;}
+      }
+    )
+  })
 });
 
 module.exports = router;
