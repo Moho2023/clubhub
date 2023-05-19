@@ -81,19 +81,16 @@
         <input type="hidden" name="clubID" class="form-control" value="<%=club.clubID%>" readonly required>
         <div class="col-sm-6 me-3 mb-3">
           <label for="subject">Announcement Subject</label>
-          <input type="text" name="subject" class="form-control" id="subject" value="" required>
+          <input type="text" name="subject" class="form-control" id="subjectInput" value="" required>
         </div>
         <div class="col-sm-6 me-3 mb-3">
           <label for="announcement" class="form-label">Announcement Text*</label>
           <textarea name="announcement" class="form-control" id="announcement" rows="8"></textarea>
         </div>
         <div class="col-12">
-          <button class="btn btn-primary" type="submit">Post announcement</button>
+          <button class="btn btn-primary" id="announceButton" type="submit">Post announcement</button>
         </div>
       </form>
-
-
-
 
     </div>
   </div>
@@ -233,5 +230,21 @@
   </div>
 </div>
 </div>
+
+<script>
+  console.log("script started")
+  document.getElementById("announceButton").addEventListener('click', function (){
+      let socket = io.connect('/');//the default namespace
+
+      let announcement = {}
+
+      announcement["clubname"] = document.getElementById("clubname").value
+      announcement["subject"] = document.getElementById("subjectInput").value
+      announcement["message"] = document.getElementById("announcement").value
+
+      socket.emit('announcement', announcement);
+  });
+
+</script>
 
 <%-include('partials/footer')-%>

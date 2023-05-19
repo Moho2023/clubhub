@@ -6,6 +6,8 @@ const CLUBS = require("../models/clubs_model.js");
 const ADMIN = require("../models/admin_model.js");
 const MANAGE = require("../models/manage_model.js")
 router = express.Router();
+const sqlite3 = require('sqlite3').verbose();
+const db = new sqlite3.Database(__dirname+'/../data/admin_dash.db');
 
 function loggedIn(request, response, next) {
   if (request.user) {
@@ -25,12 +27,22 @@ function admin_only(request, response, next){
 }
 
 router.get('/admin', loggedIn, admin_only, function(request, response){
+    let logsdata;
+    db.all("SELECT * FROM logs", function(err, rows){
+      if(err){
+        console.log(err);
+        response.redirect('/error?code=500')
+      } else {
+        logsdata = rows;
+      }
+    })
     response.status(200);
     response.setHeader('Content-Type', 'text/html');
     response.render("admin_dashboard", {
         user: request.user,
         clubs: CLUBS.getAllClubs(),
-        receipts: MANAGE.getAllReimbursementRequests()
+        receipts: MANAGE.getAllReimbursementRequests(),
+        logdata: logsdata
       })
   })
 

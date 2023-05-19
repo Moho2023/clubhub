@@ -73,6 +73,14 @@ router.get('/auth/google/callback',
         }
       )
     })
+    db.all("SELECT * FROM logs", function(err, rows){
+      if(err){
+        console.log(err);
+      } else {
+        console.log("*******************");
+        console.log(rows);
+      }
+    })
     response.redirect('/');
   });
 
