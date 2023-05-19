@@ -34,9 +34,7 @@ router.get('/admin', loggedIn, admin_only, function(request, response){
         response.redirect('/error?code=500')
       } else {
         logsdata = rows;
-      }
-    })
-    response.status(200);
+        response.status(200);
     response.setHeader('Content-Type', 'text/html');
     response.render("admin_dashboard", {
         user: request.user,
@@ -44,6 +42,9 @@ router.get('/admin', loggedIn, admin_only, function(request, response){
         receipts: MANAGE.getAllReimbursementRequests(),
         logdata: logsdata
       })
+      }
+    })
+    
   })
 
 

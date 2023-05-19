@@ -53,15 +53,17 @@
       <th>Timestamp</th>
       <th>Event</th>
     </tr>
-    <% let logsdata = logdata %>
-    <% for(let i in logsdata){ %>
+
+    <% logdata.forEach(element => { %>
       <tr>
-        <td><%=i%></td>
-        <td>Maria Anders</td>
-        <td>Germany</td>
-        <td>logged in</td>
+        <td><%=element.id%></td>
+        <td><%=element.useremail%></td>
+        <td><%=element.logtime%></td>
+        <td><%=element.userevent%></td>
       </tr>
-    <%  } %>
+      <% }) %>
+
+
   </table>
 
 </div>

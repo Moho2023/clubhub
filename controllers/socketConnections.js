@@ -4,9 +4,10 @@ const socketapi = {
 };
 
 io.on('connection', function(socket){
-
+    console.log("client connected")
     socket.on('announcement', function(data) {
       console.log('announcement:');
+      io.emit('announcement', data);
     });
 
 });

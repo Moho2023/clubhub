@@ -10,6 +10,9 @@
 </head>
 <body>
 
+    <div class="toast-container" style="position: fixed; bottom: 10px; right: 10px;" id="notificationContainer">
+	</div>
+
     <script>
         console.log('script')
         let socket = io.connect('/');//the default namespace
@@ -26,11 +29,12 @@
     
                 let toastClub = document.createElement('strong');
                 toastClub.classList.toggle('me-auto')
-                let toastClubText = document.createTextNode(data['data']['clubname']);
+                let toastClubText = document.createTextNode(data['clubname']);
+                console.log(toastClubText);
                 toastClub.appendChild(toastClubText);
     
                 let toastUser = document.createElement('strong');
-                let toastUserText = document.createTextNode(data['data']['subject']);
+                let toastUserText = document.createTextNode(data['subject']);
                 toastUser.appendChild(toastUserText);
     
                 let toastButton = document.createElement('button');
@@ -46,12 +50,16 @@
     
                 let toastBody = document.createElement("div");
                 toastBody.classList.toggle('toast-body')
-                let toastText = document.createTextNode(data['data']['message']);
+                let toastText = document.createTextNode(data['message']);
                 toastBody.appendChild(toastText);
     
                 fullToast.appendChild(toastHeader);
                 fullToast.appendChild(toastBody);
     
+            console.log(toastClubText);
+            console.log(toastUserText)
+            console.log(toastText)
+
                 document.getElementById('notificationContainer').appendChild(fullToast);
             
         });

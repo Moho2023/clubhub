@@ -92,6 +92,8 @@
         </div>
       </form>
 
+      <button class="btn btn-primary" id="remindButton" type="submit">Remind</button>
+
     </div>
   </div>
 
@@ -233,7 +235,7 @@
 
 <script>
   console.log("script started")
-  document.getElementById("announceButton").addEventListener('click', function (){
+  document.getElementById("remindButton").addEventListener('click', function (){
       let socket = io.connect('/');//the default namespace
 
       let announcement = {}
